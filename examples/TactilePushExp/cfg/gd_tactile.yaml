@@ -1,0 +1,33 @@
+params:  
+  env:
+    name: TactilePush-v1
+    observation_type: tactile_flatten
+
+  network:
+    actor: DiagGaussianActor
+    actor_mlp:
+      layer_sizes: [64, 64]
+      activation: elu
+      layernorm: False
+    actor_logstd_init: -1.
+
+  config:
+    num_epochs: 300
+    # num_episodes: 32
+    num_episodes: 16
+    # num_episodes: 8
+    # num_steps: 1
+    num_processes: 1
+    # lr: 0.0003
+    # lr: 0.02
+    lr: 0.005
+    # lr: 0.001
+    # lr: 0.0001
+    truncate_grads: True
+    grad_norm: 1.0
+    # betas: [0.6, 0.9]
+    betas: [0.7, 0.95]
+    # betas: [0.9, 0.999]
+    lr_schedule: linear
+    obs_rms: False
+    gamma: 0.99

@@ -1,0 +1,151 @@
+<redmax model="dclaw">
+    <option integrator="BDF1" timestep="5e-3" unit="m-kg" gravity="0. 0. -9.8"/>
+
+    <solver_option tol="1e-8" max_iter="100" max_ls="20"/>
+
+    <ground pos="0 0 -0.1" normal="0 0 1"/>
+
+    <default>
+        <joint lim_stiffness="10" damping="0.2" />
+        <general_primitive_contact kn="1e3" kt="5." mu="1.5" damping="1e2" />
+        <tactile kn="1e3" kt="1" mu="1.2" damping="0.003"/>
+        <motor P="10." D="0.1" ctrl_range="-2.6 2.6"/>
+    </default>
+
+    <robot>
+        <link name = "base_link">
+            <joint name = "base_link" type = "fixed" pos = "0 0 0.25" quat = "0 0 1 0"/>
+            <body name= "base_link" type = "abstract" pos = "0.001043 -0.0014473 0.003175" quat = "-1.1477544958097905e-18 0.257836697611224 0.9661885102633638 4.3009673049980094e-18" mass = "0.12418" inertia = "0.00017124632763821905 0.00017162367236178095 0.00034204" rgba = "0.5 0.5 0.5 1.0">
+                <visual mesh = "visual_meshes/base_link.obj" pos = "0.001625422652120598 0.000735205748055088 0.003175" quat = "1.1477544958097905e-18 0.25783669761122396 0.9661885102633638 4.3009673049980094e-18"/>
+                <collision contacts = "contacts/base_link.txt" pos = "0.001625422652120598 0.000735205748055088 0.003175" quat = "1.1477544958097905e-18 0.25783669761122396 0.9661885102633638 4.3009673049980094e-18"/>
+            </body>
+            <link name = "one0_jnt">
+                <joint name = "one0_jnt" type = "fixed" pos = "0.031255 0.05082 0.0206" quat = "0.6126535249229415 0.35306348125647746 -0.6126557753291288 0.35306477813344045"/>
+                <body name= "one0_link" type = "abstract" pos = "-9.6984e-12 -0.011645 0.00042918" quat = "-0.4985827919761667 0.5014132007272494 -0.4985827936854125 0.5014132023815838" mass = "0.093" inertia = "7.0139868785255815e-06 1.0544113121474411e-05 1.198e-05" rgba = "0.3 0.3 0.3 1.0">
+                    <visual mesh = "visual_meshes/one0_link.obj" pos = "-0.011647242918736922 0.0003632531683724751 -2.945266417525368e-11" quat = "0.4985827919761666 0.5014132007272494 -0.49858279368541236 0.5014132023815838"/>
+                    <collision contacts = "contacts/one0_link.txt" pos = "-0.011647242918736922 0.0003632531683724751 -2.945266417525368e-11" quat = "0.4985827919761666 0.5014132007272494 -0.49858279368541236 0.5014132023815838"/>
+                </body>
+                <link name = "one1_jnt">
+                    <joint name = "one1_jnt" type = "revolute" pos = "0.0 0.0 0.0" quat = "0.49764264957982246 -0.5023444602228856 -0.49764447752669977 -0.5023463054405095" axis = "1.0 0.0 0.0" lim="-0.45 1.35"/>
+                    <body name= "one1_link" type = "abstract" pos = "-7.8252e-12 0.050471 0.00034957" quat = "-0.4985061326182847 0.501489414958708 -0.4985061355374748 0.5014894168951393" mass = "0.093" inertia = "1.0007880768565875e-05 1.335711923143412e-05 1.3448e-05" rgba = "0.4 0.6 0.4 1.0">
+                        <visual mesh = "visual_meshes/one1_link.obj" pos = "0.05046801589677817 0.0006507008740161534 2.533786260980931e-10" quat = "0.49850613261828464 0.501489414958708 -0.4985061355374747 0.5014894168951392"/>
+                        <collision contacts = "contacts/one1_link.txt" pos = "0.05046801589677817 0.0006507008740161534 2.533786260980931e-10" quat = "0.49850613261828464 0.501489414958708 -0.4985061355374747 0.5014894168951392"/>
+                    </body>
+                    <link name = "one2_jnt">
+                        <joint name = "one2_jnt" type = "revolute" pos = "0.0 0.0685 0.0" quat = "0.7071054825112363 0.0 0.7071080798594735 0.0" axis = "1.0 0.0 0.0" lim="-2 2"/>
+                        <body name= "one2_link" type = "abstract" pos = "0.00034957 0.050471 8.1916e-12" quat = "1.18766328145262e-09 0.7111386017551162 -0.7030518395493879 1.1527813655755312e-09" mass = "0.093" inertia = "1.0007771455033658e-05 1.1755228544966342e-05 1.505e-05" rgba = "0.6 0.4 0.4 1.0">
+                            <visual mesh = "visual_meshes/one2_link.obj" pos = "0.050463701652406906 0.0009267446907129577 1.7526711938017813e-10" quat = "-1.18766328145262e-09 0.7111386017551163 -0.7030518395493879 1.1527813655755312e-09"/>
+                            <collision contacts = "contacts/one2_link.txt" pos = "0.050463701652406906 0.0009267446907129577 1.7526711938017813e-10" quat = "-1.18766328145262e-09 0.7111386017551163 -0.7030518395493879 1.1527813655755312e-09"/>
+                        </body>
+                        <link name = "one3_jnt">
+                            <joint name = "one3_jnt" type = "revolute" pos = "0.0 0.0685 0.0" quat = "1.0 0.0 0.0 0.0" axis = "1.0 0.0 0.0" lim="-2 2"/>
+                            <body name= "one3_link" type = "abstract" pos = "2.2419e-09 0.040897 2.1863e-09" quat = "2.303155491580075e-08 0.707107017730114 -0.7071065446429007 -3.845462205107743e-08" mass = "0.025" inertia = "5.024999999998739e-06 7.840500000001242e-06 1.0341000000000022e-05" rgba = "0.3 0.3 0.7 1.0">
+                                <visual mesh = "visual_meshes/one3_link.obj" pos = "0.04089699999998938 2.960388855581077e-08 1.2942760308124325e-09" quat = "-2.3031554915800744e-08 0.707107017730114 -0.7071065446429005 -3.845462205107742e-08"/>
+                                <collision contacts = "contacts/one3_link.txt" pos = "0.04089699999998938 2.960388855581077e-08 1.2942760308124325e-09" quat = "-2.3031554915800744e-08 0.707107017730114 -0.7071065446429005 -3.845462205107742e-08"/>
+                            </body>
+                        </link>
+                    </link>
+                </link>
+            </link>
+            <link name = "two0_jnt">
+                <joint name = "two0_jnt" type = "fixed" pos = "0.031073 -0.05367 0.0206" quat = "0.6121055407962218 -0.3540126697224452 -0.6121077891895474 -0.35401397008597857"/>
+                <body name= "two0_link" type = "abstract" pos = "-9.3896e-12 -0.011645 0.00042918" quat = "-0.4985827919816005 0.501413200720823 -0.4985827936799786 0.5014132023880102" mass = "0.093" inertia = "7.013986878525587e-06 1.0544113121474413e-05 1.198e-05" rgba = "0.3 0.3 0.3 1.0">
+                    <visual mesh = "visual_meshes/two0_link.obj" pos = "-0.011647242918736922 0.00036325316837247445 -2.979398165657276e-11" quat = "0.49858279198160044 0.501413200720823 -0.49858279367997854 0.5014132023880102"/>
+                    <collision contacts = "contacts/two0_link.txt" pos = "-0.011647242918736922 0.00036325316837247445 -2.979398165657276e-11" quat = "0.49858279198160044 0.501413200720823 -0.49858279367997854 0.5014132023880102"/>
+                </body>
+                <link name = "two1_jnt">
+                    <joint name = "two1_jnt" type = "revolute" pos = "0.0 0.0 0.0" quat = "-0.5023481352067478 0.49764080620249007 0.5023462863436241 0.4976426304620699" axis = "1.0 0.0 0.0" lim="-0.45 1.35"/>
+                    <body name= "two1_link" type = "abstract" pos = "-7.6742e-12 0.050471 0.00034957" quat = "-0.4985061326869364 0.5014894148881243 -0.49850613546882316 0.5014894169657231" mass = "0.093" inertia = "1.0007880768565882e-05 1.335711923143412e-05 1.3448e-05" rgba = "0.4 0.6 0.4 1.0">
+                        <visual mesh = "visual_meshes/two1_link.obj" pos = "0.050468015896778164 0.0006507008740161561 2.532833787542688e-10" quat = "0.49850613268693633 0.5014894148881243 -0.49850613546882316 0.5014894169657232"/>
+                        <collision contacts = "contacts/two1_link.txt" pos = "0.050468015896778164 0.0006507008740161561 2.532833787542688e-10" quat = "0.49850613268693633 0.5014894148881243 -0.49850613546882316 0.5014894169657232"/>
+                    </body>
+                    <link name = "two2_jnt">
+                        <joint name = "two2_jnt" type = "revolute" pos = "0.0 0.0685 0.0" quat = "0.7071054825112363 0.0 -0.7071080798594735 0.0" axis = "-1.0 0.0 0.0" lim="-2 2"/>
+                        <body name= "two2_link" type = "abstract" pos = "0.00034957 0.050471 7.3973e-12" quat = "1.179036826357064e-09 0.7111386017551162 -0.703051839549388 1.1666362440816316e-09" mass = "0.093" inertia = "1.0007771455033658e-05 1.1755228544966342e-05 1.505e-05" rgba = "0.6 0.4 0.4 1.0">
+                            <visual mesh = "visual_meshes/two2_link.obj" pos = "0.0504637016524069 0.0009267446907129493 1.7482569696026754e-10" quat = "-1.1790368263570635e-09 0.7111386017551161 -0.7030518395493879 1.1666362440816313e-09"/>
+                            <collision contacts = "contacts/two2_link.txt" pos = "0.0504637016524069 0.0009267446907129493 1.7482569696026754e-10" quat = "-1.1790368263570635e-09 0.7111386017551161 -0.7030518395493879 1.1666362440816313e-09"/>
+                        </body>
+                        <link name = "two3_jnt">
+                            <joint name = "two3_jnt" type = "revolute" pos = "0.0 0.0685 0.0" quat = "1.0 0.0 0.0 0.0" axis = "-1.0 0.0 0.0" lim="-2 2"/>
+                            <body name= "two3_link" type = "abstract" pos = "2.2419e-09 0.040897 2.1863e-09" quat = "2.303155491580075e-08 0.707107017730114 -0.7071065446429007 -3.845462205107743e-08" mass = "0.025" inertia = "5.024999999998739e-06 7.840500000001242e-06 1.0341000000000022e-05" rgba = "0.3 0.3 0.7 1.0">
+                                <visual mesh = "visual_meshes/two3_link.obj" pos = "0.04089699999998938 2.960388855581077e-08 1.2942760308124325e-09" quat = "-2.3031554915800744e-08 0.707107017730114 -0.7071065446429005 -3.845462205107742e-08"/>
+                                <collision contacts = "contacts/two3_link.txt" pos = "0.04089699999998938 2.960388855581077e-08 1.2942760308124325e-09" quat = "-2.3031554915800744e-08 0.707107017730114 -0.7071065446429005 -3.845462205107742e-08"/>
+                            </body>
+                        </link>
+                    </link>
+                </link>
+            </link>
+            <link name = "three0_jnt">
+                <joint name = "three0_jnt" type = "fixed" pos = "-0.059327 -0.0012677 0.0206" quat = "0.0005630869830296299 0.7071052583105982 -0.0005630890513674083 0.7071078556580119"/>
+                <body name= "three0_link" type = "abstract" pos = "0.0 0.0 0.0" quat = "1.0 0.0 0.0 0.0" mass = "0.093" inertia="7.013986878525587e-06 1.0544113121474413e-05 1.198e-05" rgba = "0.3 0.3 0.3 1.0">
+                    <visual mesh = "visual_meshes/three0_link.obj" pos = "0.0 0.0 0.0" quat = "1.0 0.0 0.0 0.0"/>
+                    <collision contacts = "contacts/three0_link.txt" pos = "0.0 0.0 0.0" quat = "1.0 0.0 0.0 0.0"/>
+                </body>
+                <link name = "three1_jnt">
+                    <joint name = "three1_jnt" type = "revolute" pos = "0.0 0.0 0.0" quat = "0.49764264957982246 -0.5023444602228856 -0.49764447752669977 -0.5023463054405095" axis = "1.0 0.0 0.0" lim="-0.45 1.35"/>
+                    <body name= "three1_link" type = "abstract" pos = "-7.7928e-12 0.050471 0.00034957" quat = "-0.498506132653233 0.501489414923087 -0.49850613550252637 0.5014894169307603" mass = "0.093" inertia = "1.0007880768565878e-05 1.335711923143412e-05 1.3448e-05" rgba = "0.4 0.6 0.4 1.0">
+                        <visual mesh = "visual_meshes/three1_link.obj" pos = "0.05046801589677818 0.0006507008740161592 2.5334353486919204e-10" quat = "0.498506132653233 0.5014894149230872 -0.4985061355025264 0.5014894169307603"/>
+                        <collision contacts = "contacts/three1_link.txt" pos = "0.05046801589677818 0.0006507008740161592 2.5334353486919204e-10" quat = "0.498506132653233 0.5014894149230872 -0.4985061355025264 0.5014894169307603"/>
+                    </body>
+                    <link name = "three2_jnt">
+                        <joint name = "three2_jnt" type = "revolute" pos = "0.0 0.0685 0.0" quat = "0.7071054825112363 0.0 -0.7071080798594735 0.0" axis = "-1.0 0.0 0.0" lim="-2 2"/>
+                        <body name= "three2_link" type = "abstract" pos = "0.00034957 0.050471 7.8204e-12" quat = "1.182685011611019e-09 0.7111386017551162 -0.703051839549388 1.1594630071005653e-09" mass = "0.093" inertia = "1.0007771455033658e-05 1.1755228544966342e-05 1.505e-05" rgba = "0.6 0.4 0.4 1.0">
+                            <visual mesh = "visual_meshes/three2_link.obj" pos = "0.0504637016524069 0.0009267446907129493 1.7500697061621667e-10" quat = "-1.1826850116110185e-09 0.7111386017551161 -0.7030518395493879 1.1594630071005649e-09"/>
+                            <collision contacts = "contacts/three2_link.txt" pos = "0.0504637016524069 0.0009267446907129493 1.7500697061621667e-10" quat = "-1.1826850116110185e-09 0.7111386017551161 -0.7030518395493879 1.1594630071005649e-09"/>
+                        </body>
+                        <link name = "three3_jnt">
+                            <joint name = "three3_jnt" type = "revolute" pos = "0.0 0.0685 0.0" quat = "1.0 0.0 0.0 0.0" axis = "-1.0 0.0 0.0" lim="-2 2"/>
+                            <body name= "three3_link" type = "abstract" pos = "2.242e-09 0.040897 2.1722e-09" quat = "2.3604753279034112e-08 0.7071070177301139 -0.7071065446429006 -3.855162737573422e-08" mass = "0.025" inertia = "5.024999999998736e-06 7.840500000001242e-06 1.0341000000000022e-05" rgba = "0.3 0.3 0.7 1.0">
+                                <visual mesh = "visual_meshes/three3_link.obj" pos = "0.04089699999998939 2.960398855646051e-08 1.307717666523779e-09" quat = "-2.3604753279034116e-08 0.7071070177301139 -0.7071065446429006 -3.855162737573422e-08"/>
+                                <collision contacts = "contacts/three3_link.txt" pos = "0.04089699999998939 2.960398855646051e-08 1.307717666523779e-09" quat = "-2.3604753279034116e-08 0.7071070177301139 -0.7071065446429006 -3.855162737573422e-08"/>
+                            </body>
+                        </link>
+                    </link>
+                </link>
+            </link>
+        </link>
+    </robot>
+
+    <robot>
+        <link name="bottle">
+            <joint name="bottle" type="fixed" pos="0 0 -0.04" quat="1 0 0 0" damping="0.01"/>
+            <body name="bottle" type="cylinder" radius="0.04" length="0.12" pos="0 0 0" quat="1 0 0 0" density="600" rgba="0.21 0.53 0.79 0"/>
+            <link name="cap">
+                <joint name="cap" type="revolute" axis="0 0 1" pos="0 0 0.075" quat="1 0 0 0" damping="0.01"/>
+                <body name="cap" type="cylinder" radius="0.04" length="0.03" pos="0 0 0" quat="1 0 0 0" density="600" rgba="0.78 0.74 0.61 0"/> 
+            </link>
+		</link>
+    </robot>
+
+    <sensor>
+        <tactile body="one3_link" name="one3_link_fingertip" type="abstract" render="true" spec="tactile/dclaw_fingertip_tactile.txt" pos="0.04089699999998938 2.960388855581077e-08 1.2942760308124325e-09" quat="-2.3031554915800744e-08 0.707107017730114 -0.7071065446429005 -3.845462205107742e-08"/> 
+        <tactile body="two3_link" name="two3_link_fingertip" type="abstract" render="true" spec="tactile/dclaw_fingertip_tactile.txt" pos="0.04089699999998938 2.960388855581077e-08 1.2942760308124325e-09" quat="-2.3031554915800744e-08 0.707107017730114 -0.7071065446429005 -3.845462205107742e-08"/> 
+        <tactile body="three3_link" name="three3_link_fingertip" type="abstract" render="true" spec="tactile/dclaw_fingertip_tactile.txt" pos="0.04089699999998939 2.960398855646051e-08 1.307717666523779e-09" quat="-2.3604753279034116e-08 0.7071070177301139 -0.7071065446429006 -3.855162737573422e-08"/> 
+    </sensor>
+
+    <contact>
+        <general_primitive_contact general_body="one3_link" primitive_body="cap" />
+        <general_primitive_contact general_body="two3_link" primitive_body="cap" />
+        <general_primitive_contact general_body="three3_link" primitive_body="cap" />
+    </contact>
+
+    <actuator>
+        <motor joint="one1_jnt" ctrl="force" ctrl_range="-1.8 1.8"/>
+        <motor joint="one2_jnt" ctrl="force" ctrl_range="-1.8 1.8"/>
+        <motor joint="one3_jnt" ctrl="force" ctrl_range="-1.8 1.8"/>
+        <motor joint="two1_jnt" ctrl="force" ctrl_range="-1.8 1.8"/>
+        <motor joint="two2_jnt" ctrl="force" ctrl_range="-1.8 1.8"/>
+        <motor joint="two3_jnt" ctrl="force" ctrl_range="-1.8 1.8"/>
+        <motor joint="three1_jnt" ctrl="force" ctrl_range="-1.8 1.8"/>
+        <motor joint="three2_jnt" ctrl="force" ctrl_range="-1.8 1.8"/>
+        <motor joint="three3_jnt" ctrl="force" ctrl_range="-1.8 1.8"/>
+    </actuator>
+
+    <variable>
+        <endeffector name="finger1" joint="one3_jnt" pos="0 0.084 0." radius="0.003"/>
+        <endeffector name="finger2" joint="two3_jnt" pos="0 0.084 0." radius="0.003"/>
+        <endeffector name="finger3" joint="three3_jnt" pos="0 0.084 0." radius="0.003"/>
+        <endeffector name="cap" joint="cap" pos="0.04 0 0" radius="0.003"/>
+	</variable>
+
+</redmax>

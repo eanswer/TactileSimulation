@@ -1,0 +1,73 @@
+<redmax model="wsg_50">
+    <option integrator="BDF1" timestep="5e-3" unit="m-kg" gravity="0. 0. -9.8"/>
+
+    <solver_option tol="1e-8" max_iter="100" max_ls="20"/>
+
+    <ground pos="0 0 0" normal="0 0 1"/>
+
+    <default>
+        <joint lim_stiffness="10" damping="2" />
+        <general_primitive_contact kn="5e3" kt="5." mu="1.5" damping="1e2" render="true"/>
+        <tactile kn="1e2" kt="8." mu="1." damping="1e1"/>
+        <motor P="10." D="0.1" ctrl_range="-2.6 2.6"/>
+    </default>
+
+    <robot>
+        <link name = "gripper_base_rotational_joint">
+            <joint name = "gripper_base_rotational" type = "revolute" axis = "0 0 1" pos = "0.02 0 0.18" quat = "1 0 0 0" damping="2"/>
+            <body name = "gripper_base_virtual" type = "cuboid" size = "0.001 0.001 0.001" pos = "0 0 0" quat = "1 0 0 0" density = "0.01" />
+            <link name = "gripper_base_rotational">
+                <joint name = "gripper_base_translational" type = "planar" axis0="1 0 0" axis1="0 1 0" pos = "0 0 0" quat = "1 0 0 0" damping="2"/>
+                <body name = "gripper_base" type = "mesh" filename="wsg50_base.obj" pos = "0 0 0" quat = "1 0 0 0" density = "1000" transform_type="OBJ_TO_JOINT" rgba="0.7 0.7 0.7 0"/>
+                <link name = "gripper_left_guide">
+                    <joint name="gripper_left_joint" type="fixed" axis = "1 0 0" lim="-0.055 0" pos = "0 0 0" quat = "0 1 0 0"/>
+                    <body name = "gripper_left_guide" type="mesh" filename="guide_left.obj" pos="0.02 0 0.18" quat="1 0 0 0" transform_type="OBJ_TO_WORLD" rgba="0.6 0.6 0.6 0"/>
+                    <link name="finger_left">
+                        <joint name="finger_left_joint" type="fixed" pos="0 0 0" quat="1 0 0 0"/>
+                        <body name="finger_left" type="mesh" filename="gelslim_left.obj" pos="0.02 0 0.18" quat="1 0 0 0" rgba="0.1 0.1 0.1 0" transform_type="OBJ_TO_WORLD"/>
+                        <link name="tactile_pad_left">
+                            <joint name="tactile_pad_left_joint" type="fixed" pos="0.004 0 0.1472" quat="0.707 0 0.707 0"/>
+                            <body name="tactile_pad_left" type="cylinder" density="1" radius="0.018" length="0.003" pos="0 0 0" quat="1 0 0 0" rgba="0.4 0.4 0.4 0" general_contact_angle_resolution="8" general_contact_radius_resolution="4"/>
+                        </link>
+                    </link>
+                </link>
+            </link>
+        </link>
+    </robot>
+
+    <robot>
+        <link name="box_translational_joint">
+            <joint name="box_translational_joint" type="translational" pos="0.05 0 0.025" quat="1 0 0 0" damping="0"/>
+			<body name="box_translational_joint" type="cuboid" size="0.001 0.001 0.001" pos="0 0 0" quat="1 0 0 0" density="0.01"/>
+            <link name="box">
+                <joint name="box" type="revolute" pos="0. 0 0" axis="0 0 1" quat="1 0 0 0" damping="0"/>
+                <body name="box" type="cuboid" size="0.05 0.05 0.05" pos="0 0 0" quat="1 0 0 0" density="600" texture="resources/textures/cube.png" general_contact_resolution = "2 2 2"/>
+            </link>
+		</link>
+    </robot>
+
+    <contact>
+        <ground_contact body="box" kn="1e3" kt="1" mu="0.8" damping="0.3"/>
+        <general_primitive_contact general_body="tactile_pad_left" primitive_body="box" kn="1e2" kt="8." mu="1." damping="1e1" render="false"/>
+    </contact>
+
+    <actuator>
+        <motor joint="gripper_base_translational" ctrl="force" ctrl_range="-1 1" />
+        <motor joint="gripper_base_rotational" ctrl="force" ctrl_range="-3 3" />
+        <motor joint="box_translational_joint" ctrl="force" ctrl_range="-0.2 0.2" />
+    </actuator>
+
+    <sensor>
+        <tactile body="tactile_pad_left" name="tactile_pad_left" type="rect_array" rect_pos0="0.007 0.00675 0.0015" rect_pos1="-0.011 -0.00675 0.0015" axis0="-1 0 0" axis1="0 -1 0" resolution="13 10" render="true"/> 
+    </sensor>
+
+    <variable>
+        <endeffector joint="tactile_pad_left_joint" pos="-0.007 0 0" radius="0.003"/>
+        <endeffector joint="box" pos="-0.025 0 0" radius="0.003"/>
+    </variable>
+
+    <virtual>
+        <cuboid name="goal" pos="1 0 0.025" quat="1 0 0 0" size="0.05 0.05 0.05" texture="resources/textures/cube.png"/>
+    </virtual>
+
+</redmax>

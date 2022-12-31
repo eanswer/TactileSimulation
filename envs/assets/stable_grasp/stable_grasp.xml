@@ -1,0 +1,179 @@
+<redmax model="wsg_50">
+    <option integrator="BDF1" timestep="5e-3" unit="m-kg" gravity="0. 0. -9.8"/>
+
+    <solver_option tol="1e-8" max_iter="100" max_ls="20"/>
+
+    <ground pos="0 0 0" normal="0 0 1"/>
+
+    <default>
+        <joint lim_stiffness="10" damping="2" />
+        <general_primitive_contact kn="5e3" kt="5." mu="1.5" damping="1e2" render="false"/>
+        <tactile kn="250" kt="1.25" mu="1.5" damping="25"/>
+        <motor P="10." D="0.1" ctrl_range="-2.6 2.6"/>
+    </default>f
+
+    <robot>
+        <link name = "gripper_base_translational_joint">
+            <joint name = "gripper_base_translational" type = "translational" pos = "0 0 0" quat = "1 0 0 0"/>
+            <body name = "gripper_base_virtual" type = "cuboid" size = "0.001 0.001 0.001" pos = "0 0 0" quat = "1 0 0 0" density = "0.01" />
+            <link name = "gripper_base_rotational">
+                <joint name = "gripper_base_rotational" type = "revolute" axis = "0 0 1" pos = "0 0 0" quat = "1 0 0 0" damping="0.2"/>
+                <body name = "gripper_base" type = "mesh" filename="wsg50_base.obj" pos = "0 0 0" quat = "1 0 0 0" density = "1" transform_type="OBJ_TO_JOINT" rgba="0.7 0.7 0.7 0"/>
+                <link name = "gripper_left_guide">
+                    <joint name="gripper_left_joint" type="prismatic" axis = "1 0 0" lim="-0.055 0" pos = "0 0 0" quat = "0 1 0 0"/>
+                    <body name = "gripper_left_guide" type="mesh" filename="guide_left.obj" pos="0 0 0" quat="1 0 0 0" transform_type="OBJ_TO_WORLD" rgba="0.6 0.6 0.6 0"/>
+                    <link name="finger_left">
+                        <joint name="finger_left_joint" type="fixed" pos="0 0 0" quat="1 0 0 0"/>
+                        <body name="finger_left" type="mesh" filename="gelslim_left.obj" pos="0 0 0" quat="1 0 0 0" rgba="0.1 0.1 0.1 0" transform_type="OBJ_TO_WORLD"/>
+                        <link name="tactile_pad_left">
+                            <joint name="tactile_pad_left_joint" type="fixed" pos="0.004 0 0.1472" quat="0.707 0 0.707 0"/>
+                            <body name="tactile_pad_left" type="cylinder" density="1" radius="0.018" length="0.003" pos="0 0 0" quat="1 0 0 0" rgba="0.4 0.4 0.4 0" general_contact_angle_resolution="8" general_contact_radius_resolution="4"/>
+                        </link>
+                    </link>
+                </link>
+                <link name = "gripper_right_guide">
+                    <joint name="gripper_right_joint" type="prismatic" axis = "1 0 0" lim="-0.055 0." pos = "0 0 0" quat = "0 0 1 0"/>
+                    <body name = "gripper_right_guide" type="mesh" filename="guide_right.obj" pos="0 0 0" quat="1 0 0 0" transform_type="OBJ_TO_WORLD" rgba="0.6 0.6 0.6 0"/>
+                    <link name="finger_right">
+                        <joint name="finger_right_joint" type="fixed" pos="0 0 0" quat="1 0 0 0"/>
+                        <body name="finger_right" type="mesh" filename="gelslim_right.obj" pos="0 0 0" quat="1 0 0 0" rgba="0.1 0.1 0.1 0" transform_type="OBJ_TO_WORLD"/>
+                        <link name="tactile_pad_right">
+                            <joint name="tactile_pad_right_joint" type="fixed" pos="0.004 0 0.1472" quat="0.707 0 0.707 0"/>
+                            <body name="tactile_pad_right" type="cylinder" density="1" radius="0.018" length="0.003" pos="0 0 0" quat="1 0 0 0" rgba="0.4 0.4 0.4 0" general_contact_angle_resolution="8" general_contact_radius_resolution="4"/>
+                        </link>
+                    </link>
+                </link>
+            </link>
+        </link>
+    </robot>
+
+    <robot>
+        <link name="box_4">
+			<joint name="box_4" type="free3d-euler" pos="0 0 0.0525" quat="1 0 0 0" damping="0.0"/>
+            <body name="box_4" type="cuboid" size="0.025 0.025 0.025" pos="0 0 0" quat="1 0 0 0" density="600" general_contact_resolution = "3 3 2" rgba = "0.8 0.2 0.2 0"/>
+            <link name="box_3">
+                <joint name="box_3" type="fixed" pos="0 -0.025 0" quat="1 0 0 0" damping="0.0"/>
+                <body name="box_3" type="cuboid" size="0.025 0.025 0.025" pos="0 0 0" quat="1 0 0 0" density="600" general_contact_resolution = "3 3 2" rgba = "0.4 0.6 0.4 0"/>
+                <link name="box_2">
+                    <joint name="box_2" type="fixed" pos="0 -0.025 0" quat="1 0 0 0" damping="0.0"/>
+                    <body name="box_2" type="cuboid" size="0.025 0.025 0.025" pos="0 0 0" quat="1 0 0 0" density="600" general_contact_resolution = "3 3 2" rgba = "0.3 0.7 0.3 0"/>
+                    <link name="box_1">
+                        <joint name="box_1" type="fixed" pos="0 -0.025 0" quat="1 0 0 0" damping="0.0"/>
+                        <body name="box_1" type="cuboid" size="0.025 0.025 0.025" pos="0 0 0" quat="1 0 0 0" density="600" general_contact_resolution = "3 3 2" rgba = "0.2 0.8 0.2 0"/>
+                        <link name="box_8">
+                            <joint name="box_8" type="fixed" pos="0 -0.025 0" quat="1 0 0 0" damping="0.0"/>
+                            <body name="box_8" type="cuboid" size="0.025 0.025 0.025" pos="0 0 0" quat="1 0 0 0" density="600" general_contact_resolution = "3 3 2" rgba = "0.2 0.8 0.2 0"/>
+                            <link name="box_9">
+                                <joint name="box_9" type="fixed" pos="0 -0.025 0" quat="1 0 0 0" damping="0.0"/>
+                                <body name="box_9" type="cuboid" size="0.025 0.025 0.025" pos="0 0 0" quat="1 0 0 0" density="600" general_contact_resolution = "3 3 2" rgba = "0.2 0.8 0.2 0"/>
+                            </link>
+                        </link>
+                    </link>
+                </link>
+            </link>
+            <link name="box_5">
+                <joint name="box_5" type="fixed" pos="0 0.025 0" quat="1 0 0 0" damping="0.0"/>
+                <body name="box_5" type="cuboid" size="0.025 0.025 0.025" pos="0 0 0" quat="1 0 0 0" density="600" general_contact_resolution = "3 3 2" rgba = "0.4 0.4 0.6 0"/>
+                <link name="box_6">
+                    <joint name="box_6" type="fixed" pos="0 0.025 0" quat="1 0 0 0" damping="0.0"/>
+                    <body name="box_6" type="cuboid" size="0.025 0.025 0.025" pos="0 0 0" quat="1 0 0 0" density="600" general_contact_resolution = "3 3 2" rgba = "0.3 0.3 0.7 0"/>
+                    <link name="box_7">
+                        <joint name="box_7" type="fixed" pos="0 0.025 0" quat="1 0 0 0" damping="0.0"/>
+                        <body name="box_7" type="cuboid" size="0.025 0.025 0.025" pos="0 0 0" quat="1 0 0 0" density="600" general_contact_resolution = "3 3 2" rgba = "0.2 0.2 0.8 0"/>
+                        <link name="box_10">
+                            <joint name="box_10" type="fixed" pos="0 0.025 0" quat="1 0 0 0" damping="0.0"/>
+                            <body name="box_10" type="cuboid" size="0.025 0.025 0.025" pos="0 0 0" quat="1 0 0 0" density="600" general_contact_resolution = "3 3 2" rgba = "0.2 0.8 0.2 0"/>
+                            <link name="box_11">
+                                <joint name="box_11" type="fixed" pos="0 0.025 0" quat="1 0 0 0" damping="0.0"/>
+                                <body name="box_11" type="cuboid" size="0.025 0.025 0.025" pos="0 0 0" quat="1 0 0 0" density="600" general_contact_resolution = "3 3 2" rgba = "0.2 0.8 0.2 0"/>
+                            </link>
+                        </link>
+                    </link>
+                </link>
+            </link>
+		</link>
+    </robot>
+
+    <robot>
+        <link name="table_1">
+            <joint name="table_1" type="fixed" pos="0 0.1 0.02" quat="1 0 0 0"/>
+            <body name="table_1" type="cuboid" pos="0 0 0" size="0.05 0.03 0.04" quat="1 0 0 0" density="1000" general_contact_resolution="6 6 2" rgba="0.3 0.3 0.3 0"/>
+        </link>
+        <link name="table_2">
+            <joint name="table_2" type="fixed" pos="0 -0.1 0.02" quat="1 0 0 0"/>
+            <body name="table_2" type="cuboid" pos="0 0 0" size="0.05 0.03 0.04" quat="1 0 0 0" density="1000" general_contact_resolution="6 6 2" rgba="0.3 0.3 0.3 0"/>
+        </link>
+    </robot>
+
+    <contact>
+        <ground_contact body="box_1" kn="1e3" kt="1" mu="0.8" damping="0.003"/>
+        <ground_contact body="box_2" kn="1e3" kt="1" mu="0.8" damping="0.003"/>
+        <ground_contact body="box_3" kn="1e3" kt="1" mu="0.8" damping="0.003"/>
+        <ground_contact body="box_4" kn="1e3" kt="1" mu="0.8" damping="0.003"/>
+        <ground_contact body="box_5" kn="1e3" kt="1" mu="0.8" damping="0.003"/>
+        <ground_contact body="box_6" kn="1e3" kt="1" mu="0.8" damping="0.003"/>
+        <ground_contact body="box_7" kn="1e3" kt="1" mu="0.8" damping="0.003"/>
+        <ground_contact body="box_8" kn="1e3" kt="1" mu="0.8" damping="0.003"/>
+        <ground_contact body="box_9" kn="1e3" kt="1" mu="0.8" damping="0.003"/>
+        <ground_contact body="box_10" kn="1e3" kt="1" mu="0.8" damping="0.003"/>
+        <ground_contact body="box_11" kn="1e3" kt="1" mu="0.8" damping="0.003"/>
+        <general_primitive_contact general_body="tactile_pad_left" primitive_body="box_1" kn="8e3" kt="80." mu="1.5" damping="1e3" render="false"/>
+        <general_primitive_contact general_body="tactile_pad_left" primitive_body="box_2" kn="8e3" kt="80." mu="1.5" damping="1e3" render="false"/>
+        <general_primitive_contact general_body="tactile_pad_left" primitive_body="box_3" kn="8e3" kt="80." mu="1.5" damping="1e3" render="false"/>
+        <general_primitive_contact general_body="tactile_pad_left" primitive_body="box_4" kn="8e3" kt="80." mu="1.5" damping="1e3" render="false"/>
+        <general_primitive_contact general_body="tactile_pad_left" primitive_body="box_5" kn="8e3" kt="80." mu="1.5" damping="1e3" render="false"/>
+        <general_primitive_contact general_body="tactile_pad_left" primitive_body="box_6" kn="8e3" kt="80." mu="1.5" damping="1e3" render="false"/>
+        <general_primitive_contact general_body="tactile_pad_left" primitive_body="box_7" kn="8e3" kt="80." mu="1.5" damping="1e3" render="false"/>
+        <general_primitive_contact general_body="tactile_pad_left" primitive_body="box_8" kn="8e3" kt="80." mu="1.5" damping="1e3" render="false"/>
+        <general_primitive_contact general_body="tactile_pad_left" primitive_body="box_9" kn="8e3" kt="80." mu="1.5" damping="1e3" render="false"/>
+        <general_primitive_contact general_body="tactile_pad_left" primitive_body="box_10" kn="8e3" kt="80." mu="1.5" damping="1e3" render="false"/>
+        <general_primitive_contact general_body="tactile_pad_left" primitive_body="box_11" kn="8e3" kt="80." mu="1.5" damping="1e3" render="false"/>
+        <general_primitive_contact general_body="tactile_pad_right" primitive_body="box_1" kn="8e3" kt="80." mu="1.5" damping="1e3" render="false"/>
+        <general_primitive_contact general_body="tactile_pad_right" primitive_body="box_2" kn="8e3" kt="80." mu="1.5" damping="1e3" render="false"/>
+        <general_primitive_contact general_body="tactile_pad_right" primitive_body="box_3" kn="8e3" kt="80." mu="1.5" damping="1e3" render="false"/>
+        <general_primitive_contact general_body="tactile_pad_right" primitive_body="box_4" kn="8e3" kt="80." mu="1.5" damping="1e3" render="false"/>
+        <general_primitive_contact general_body="tactile_pad_right" primitive_body="box_5" kn="8e3" kt="80." mu="1.5" damping="1e3" render="false"/>
+        <general_primitive_contact general_body="tactile_pad_right" primitive_body="box_6" kn="8e3" kt="80." mu="1.5" damping="1e3" render="false"/>
+        <general_primitive_contact general_body="tactile_pad_right" primitive_body="box_7" kn="8e3" kt="80." mu="1.5" damping="1e3" render="false"/>
+        <general_primitive_contact general_body="tactile_pad_right" primitive_body="box_8" kn="8e3" kt="80." mu="1.5" damping="1e3" render="false"/>
+        <general_primitive_contact general_body="tactile_pad_right" primitive_body="box_9" kn="8e3" kt="80." mu="1.5" damping="1e3" render="false"/>
+        <general_primitive_contact general_body="tactile_pad_right" primitive_body="box_10" kn="8e3" kt="80." mu="1.5" damping="1e3" render="false"/>
+        <general_primitive_contact general_body="tactile_pad_right" primitive_body="box_11" kn="8e3" kt="80." mu="1.5" damping="1e3" render="false"/>
+        <general_primitive_contact general_body="box_1" primitive_body="table_1"/>
+        <general_primitive_contact general_body="box_2" primitive_body="table_1"/>
+        <general_primitive_contact general_body="box_3" primitive_body="table_1"/>
+        <general_primitive_contact general_body="box_4" primitive_body="table_1"/>
+        <general_primitive_contact general_body="box_5" primitive_body="table_1"/>
+        <general_primitive_contact general_body="box_6" primitive_body="table_1"/>
+        <general_primitive_contact general_body="box_7" primitive_body="table_1"/>
+        <general_primitive_contact general_body="box_8" primitive_body="table_1"/>
+        <general_primitive_contact general_body="box_9" primitive_body="table_1"/>
+        <general_primitive_contact general_body="box_10" primitive_body="table_1"/>
+        <general_primitive_contact general_body="box_11" primitive_body="table_1"/>
+        <general_primitive_contact general_body="box_1" primitive_body="table_2"/>
+        <general_primitive_contact general_body="box_2" primitive_body="table_2"/>
+        <general_primitive_contact general_body="box_3" primitive_body="table_2"/>
+        <general_primitive_contact general_body="box_4" primitive_body="table_2"/>
+        <general_primitive_contact general_body="box_5" primitive_body="table_2"/>
+        <general_primitive_contact general_body="box_6" primitive_body="table_2"/>
+        <general_primitive_contact general_body="box_7" primitive_body="table_2"/>
+        <general_primitive_contact general_body="box_8" primitive_body="table_2"/>
+        <general_primitive_contact general_body="box_9" primitive_body="table_2"/>
+        <general_primitive_contact general_body="box_10" primitive_body="table_2"/>
+        <general_primitive_contact general_body="box_11" primitive_body="table_2"/>
+    </contact>
+
+    <actuator>
+        <motor joint="gripper_base_translational" ctrl="position" P="400" D="1.0" ctrl_range="-10 10"/>
+        <motor joint="gripper_base_rotational" ctrl="position" P="10" D="0.1"/>
+        <motor joint="gripper_left_joint" ctrl="position" P="50" D="0.1"/>
+        <motor joint="gripper_right_joint" ctrl="position" P="50" D="0.1"/>
+    </actuator>
+
+    <sensor>
+        <tactile body="tactile_pad_left" name="tactile_pad_left" type="rect_array" rect_pos0="0.007 0.00675 0.0015" rect_pos1="-0.011 -0.00675 0.0015" axis0="-1 0 0" axis1="0 -1 0" resolution="13 10" render="true"/> 
+        <tactile body="tactile_pad_right" name="tactile_pad_right" type="rect_array" rect_pos0="0.007 0.00675 0.0015" rect_pos1="-0.011 -0.00675 0.0015" axis0="-1 0 0" axis1="0 -1 0" resolution="13 10" render="true"/> 
+    </sensor>
+
+
+</redmax>

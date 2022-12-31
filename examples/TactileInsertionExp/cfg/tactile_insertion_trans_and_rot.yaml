@@ -1,0 +1,60 @@
+params:  
+  env:
+    name: Insertion-v3
+    observation_noise: True
+    observation_type: tactile_map
+    allow_translation: True
+    allow_rotation: True
+    normalize_tactile_obs: True
+    action_xy_scale: 0.02
+    num_obs_frames: 1
+    action_type: relative
+    reward_type: absolute
+    domain_randomization: True
+
+  network:
+    actor_critic: ActorCriticRNN
+
+    rnn_hidden_size: 64
+    rnn_hidden_layers: 3
+
+    feature_cnn:
+      kernel_sizes: [5, 3]
+      layer_sizes: [32, 16]
+      stride_sizes: [1, 1]
+      hidden_size: 64
+      activation: elu
+      layernorm: False
+
+    actor_mlp:
+      layer_sizes: [64, 64]
+      activation: elu
+      layernorm: False
+    actor_logstd_init: 0
+
+    critic_mlp:
+      layer_sizes: [64, 64] 
+      activation: elu
+      layernorm: False
+
+  config:
+    use_gae: True
+    num_env_steps: 5000000
+    num_steps: 512
+    num_processes: 8
+    lr: 0.0003
+    entropy_coef: 0
+    value_loss_coef: 0.5
+    ppo_epoch: 10
+    num_mini_batch: 8
+    gamma: 0.99
+    gae_lambda: 0.95
+    use_linear_lr_decay: True
+    use_proper_time_limits: True
+    norm_reward: True
+    norm_obs: True
+    clip_reward: 10.
+    clip_obs: 10.
+    clip_param: 0.2
+    max_grad_norm: 0.5
+    
