@@ -15,7 +15,7 @@ In this paper, we developed an efficient tactile simulator ([DiffRedMax](https:/
 
 **Operating System**: tested on Ubuntu 16.04 and Ubuntu 18.04
 
-1. Clone the project and its submodule from github: `git clone https://github.com/eanswer/DiffHand.git --recursive `.
+1. Clone the project and its submodule from github: `git clone git@github.com:eanswer/TactileSimulation.git --recursive `.
 
 2. Install **CMake** >= 3.1.0: [official instruction for cmake installation](https://cmake.org/install/)
 
