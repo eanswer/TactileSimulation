@@ -1,0 +1,4 @@
+
+[submodule "externals/DiffHand"]
+	path = externals/DiffHand
+	url = git@github.com:eanswer/DiffHand.git

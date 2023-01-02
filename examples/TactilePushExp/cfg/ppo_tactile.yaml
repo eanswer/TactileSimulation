@@ -21,9 +21,6 @@ params:
     use_gae: True
     num_env_steps: 2000000
     num_steps: 1024
-    # num_steps: 512
-    # num_steps: 256
-    # num_processes: 8
     num_processes: 8
     lr: 0.0003
     entropy_coef: 0

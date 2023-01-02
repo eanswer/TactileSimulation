@@ -180,7 +180,7 @@ class DClawRotateEnv(RedMaxTorchEnv):
             print(f'='*50)
             print(f'Damping:{damping}  Radius:{radius}  dx:{dx}  dy:{dy}')
         self.sim.set_state_init(q_init, qdot_init)
-        print('reset')
+        
         self.sim.reset(backward_flag = False)
         self.energy_usage = 0
         self.has_been_reset = True
@@ -218,7 +218,6 @@ class DClawRotateEnv(RedMaxTorchEnv):
         info = {'success': success}
         if done:
             info['reward_energy'] = self.energy_usage
-            self.render('loop')
 
         return self._get_obs(), reward, done, info
 
@@ -264,7 +263,7 @@ class DClawRotateEnv(RedMaxTorchEnv):
                 cv2.waitKey(1)
 
                 time.sleep(0.05)
-        
+
         super().render(mode) 
 
     def get_tactile_forces_array(self):

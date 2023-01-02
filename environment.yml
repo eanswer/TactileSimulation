@@ -1,0 +1,22 @@
+name: tactile_control_env
+channels:
+  - pytorch
+  - defaults
+dependencies:
+  - pip
+  - python==3.8.0=h0371630_2
+  - ffmpeg==4.3=hf484d3e_0
+  - pytorch
+  - torchaudio
+  - cpuonly
+  - torchvision
+  - pip:
+    - ipython==8.7.0
+    - matplotlib==3.6.2
+    - matplotlib-inline==0.1.6
+    - numpy==1.24.1
+    - opencv-python==4.6.0.66
+    - tensorboardx==2.5.1
+    - scipy==1.9.3
+    - pyyaml==6.0
+

@@ -224,8 +224,8 @@ class TactileInsertionEnv(RedMaxTorchEnv):
         self.prev_object_pose = torch.tensor([self.current_q_init[0], self.current_q_init[1], self.current_q_init[3]])
 
         self.sim.clearBackwardCache()
-        self.record_episode_idx += 1
-        self.record_insertion_idx = 0
+        self.record_idx += 1
+        self.record_episode_idx = 0
         
         # domain randomization
         if self.domain_randomization:
@@ -489,8 +489,10 @@ class TactileInsertionEnv(RedMaxTorchEnv):
             print_info('Press [Esc] to continue...')
             cv2.waitKey(0)
 
-        print_info('Press [Esc] to continue...')
-        super().render('loop') 
+        if mode == 'loop':
+            print_info('Press [Esc] to continue...')
+
+        super().render(mode) 
 
     # return tactile obs array: shape (T, 2, nrows, ncols, 2)
     def get_tactile_obs_array(self):

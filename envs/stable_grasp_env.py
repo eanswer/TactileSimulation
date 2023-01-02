@@ -335,10 +335,7 @@ class StableGraspEnv(RedMaxTorchEnv):
             cv2.waitKey(0)
     
         if mode == 'record':
-            export_folder = os.path.join("simulation_export", "stable_grasp", '{}'.format(self.record_idx), '{}'.format(self.record_episode_idx))
-            os.makedirs(os.path.join(export_folder, "meshes"), exist_ok = True)
-            self.sim.export_replay(export_folder)
-            self.record_episode_idx += 1
+            super().render(mode = 'record')
         else:
             print_info('Press [Esc] to continue.')
             super().render(mode)
