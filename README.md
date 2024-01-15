@@ -134,11 +134,13 @@ python train_tactile_insertion_ppo.py
 
 ## Trouble Shooting
 
-##### Downgrade `stable-baseline3` to version `1.3.0` if you saw the following error while running PPO training:
-
-```
-TypeError: reset() got an unexpected keyword argument 'seed'
-```
+> [!WARNING]
+>
+>  Downgrade `stable-baseline3` to version `1.3.0` if you saw the following error while running PPO training:
+>
+> ```
+> TypeError: reset() got an unexpected keyword argument 'seed'
+> ```
 
 
 
