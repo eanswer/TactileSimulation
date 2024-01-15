@@ -1,5 +1,5 @@
 gym
 matplotlib
 pybullet
-stable-baselines3
+stable-baselines3==1.3.0
 h5py

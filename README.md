@@ -41,8 +41,6 @@ In this paper, we developed an efficient tactile simulator ([DiffRedMax](https:/
    ```
 
 
-
-
 ## Code Structure
 
 The examples in the paper are in the `examples` folder. Each example is corresponding to a subfolder.
@@ -132,6 +130,15 @@ python train_tactile_insertion_ppo.py
 
 <p align="center">
     <img src="demos/tactile_insertion_sim.gif" alt="tactile_insertion" width="500" /></p>
+
+
+## Trouble Shooting
+
+##### Downgrade `stable-baseline3` to version `1.3.0` if you saw the following error while running PPO training:
+
+```
+TypeError: reset() got an unexpected keyword argument 'seed'
+```
 
 
 
